@@ -40,7 +40,7 @@
       color: var(--text-primary);
       font-family: var(--font-sans);
       -webkit-font-smoothing: antialiased;
-      overflow: hidden; /* 全視窗鎖定，body 不捲動 */
+      overflow: hidden;
     }
 
     button {
@@ -63,7 +63,6 @@
       overflow: hidden;
     }
 
-    /* 頂部固定列：左區對齊側欄 240px，右區對齊卡片區置中 */
     .app-header {
       flex-shrink: 0;
       display: flex;
@@ -100,8 +99,8 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 8px 14px;
-      padding: 8px 16px;
+      gap: 8px 12px;
+      padding: 8px 14px;
     }
 
     .control-group {
@@ -189,6 +188,18 @@
       color: #FFFFFF;
     }
 
+    .outline-btn.is-sync-btn {
+      color: #3B5B72;
+      border-color: #B4C4D1;
+      background-color: #F4F7FA;
+    }
+
+    .outline-btn.is-sync-btn:hover {
+      background-color: #E6EEF4;
+      border-color: #4B6B82;
+      color: #1E3A4C;
+    }
+
     .core-dot {
       width: 9px;
       height: 9px;
@@ -270,7 +281,7 @@
       font-weight: 700;
       color: var(--text-secondary);
       font-variant-numeric: tabular-nums;
-      min-width: 88px;
+      min-width: 92px;
       text-align: right;
       white-space: nowrap;
     }
@@ -326,7 +337,6 @@
       gap: 10px;
     }
 
-    /* 左側大分類卡片：加大高度 + 明顯清晰框線 + 放大字體 */
     .cat-card-btn {
       width: 100%;
       min-height: 74px;
@@ -417,7 +427,6 @@
       line-height: 1.45;
     }
 
-    /* 右側獨立捲動區 */
     .main-scroll {
       flex: 1;
       min-width: 0;
@@ -434,7 +443,6 @@
       gap: 16px;
     }
 
-    /* 分類標題區：透明背景，僅底部細線分隔 */
     .section-header {
       padding-bottom: 10px;
       border-bottom: 1.5px solid var(--border-default);
@@ -495,7 +503,6 @@
       border: 2.5px solid var(--border-core);
     }
 
-    /* 動作按鈕 (發音 + 熟記) */
     .action-btns {
       display: inline-flex;
       align-items: center;
@@ -734,7 +741,6 @@
       line-height: 1.4;
     }
 
-    /* 店員聽力防禦雙欄卡 */
     .listening-card {
       padding: 12px 14px;
       display: grid;
@@ -808,7 +814,6 @@
       margin-top: 2px;
     }
 
-    /* 動詞公式與延伸文法雙欄卡 */
     .grammar-card {
       padding: 13px 15px;
       display: grid;
@@ -929,7 +934,6 @@
       line-height: 1.55;
     }
 
-    /* 空狀態提示 */
     .empty-state {
       background-color: rgba(255, 255, 255, 0.8);
       border: 2px dashed var(--border-strong);
@@ -963,32 +967,97 @@
       background-color: #1E293B;
     }
 
-    /* Toast 浮動提示 */
+    /* Toast 浮動提示（底部中央顯示） */
     .toast-container {
       position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 60;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      z-index: 70;
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 8px;
       pointer-events: none;
+      width: min(92vw, 560px);
     }
 
     .toast-item {
       background-color: #1E293B;
       color: #FFFFFF;
-      font-size: 14px;
-      font-weight: 600;
-      padding: 9px 14px;
-      border-radius: 9px;
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.18);
+      font-size: 14.5px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.24);
+      text-align: center;
+      line-height: 1.45;
       opacity: 1;
-      transition: opacity 0.25s ease;
+      transition: opacity 0.25s ease, transform 0.25s ease;
     }
 
     .toast-item.is-fading {
       opacity: 0;
+      transform: translateY(6px);
+    }
+
+    /* 手動複製同步網址備援視窗（剪貼簿受限時顯示） */
+    .sync-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 80;
+    }
+
+    .sync-modal-backdrop.is-open {
+      display: flex;
+    }
+
+    .sync-modal {
+      width: min(520px, 100%);
+      background-color: #FFFFFF;
+      border: 1.5px solid var(--border-strong);
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .sync-modal h3 {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .sync-modal p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .sync-modal-input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-strong);
+      background-color: var(--bg-subtle);
+      color: var(--text-primary);
+      font-size: 13.5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .sync-modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
     }
 
     /* =========================================================================
@@ -1081,23 +1150,21 @@
   <div class="app-shell">
     <!-- ==================== 頂部固定整合列 (不隨單字捲動) ==================== -->
     <header class="app-header">
-      <!-- 左上角固定標題區 (對齊左側欄寬度 240px) -->
       <div class="header-brand">
         <h1>冬季旅遊日文實戰手冊</h1>
       </div>
 
-      <!-- 右上角控制列與進度條 (對應右側單字區置中對齊) -->
       <div class="header-controls-wrap">
         <!-- 範圍篩選：全部 / 必背 (紅點無星號) -->
         <div class="seg-group" role="group" aria-label="學習範圍篩選">
-          <button id="btnFilterAll" type="button" class="ctrl-btn is-active" title="顯示全部 143 項">
+          <button id="btnFilterAll" type="button" class="ctrl-btn is-active" title="顯示全部項目">
             <span>全部</span>
             <span id="totalAllChip" class="chip-num">143</span>
           </button>
           <button id="btnFilterCore" type="button" class="ctrl-btn" title="只顯示粗紅框必背項目">
             <span class="core-dot"></span>
             <span>必背</span>
-            <span id="coreTotalChip" class="chip-num">90</span>
+            <span id="coreTotalChip" class="chip-num">0</span>
           </button>
         </div>
 
@@ -1123,6 +1190,11 @@
           <button id="btnRateSlow" type="button" class="ctrl-btn" title="慢速跟讀 0.75x">0.75x</button>
         </div>
 
+        <!-- 跨裝置同步網址按鈕 -->
+        <button id="btnSyncProgress" type="button" class="outline-btn is-sync-btn" title="產生並複製專屬同步網址，在其他裝置打開即可同步進度">
+          🔗 同步進度
+        </button>
+
         <span class="divider-v" aria-hidden="true"></span>
 
         <!-- 加長版雙進度條 + 兩段式安全重置 -->
@@ -1136,7 +1208,7 @@
               <div class="progress-track">
                 <div id="coreProgressFill" class="progress-fill" style="background-color: #C94A4A;"></div>
               </div>
-              <span id="coreProgressText" class="progress-stat">0/90 (0%)</span>
+              <span id="coreProgressText" class="progress-stat">0/0 (0%)</span>
             </div>
             <div class="progress-row">
               <span class="progress-label">
@@ -1179,8 +1251,21 @@
     </div>
   </div>
 
-  <!-- 浮動提示容器 -->
+  <!-- 底部中央浮動提示容器 -->
   <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- 手動複製備援視窗（僅在瀏覽器封鎖剪貼簿寫入時出現） -->
+  <div id="syncModalBackdrop" class="sync-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="syncModalTitle">
+    <div class="sync-modal">
+      <h3 id="syncModalTitle">🔗 複製跨裝置同步網址</h3>
+      <p id="syncModalDesc">請全選複製下方網址，傳送到手機或平板並開啟，即可載入目前的熟記進度：</p>
+      <input id="syncModalInput" class="sync-modal-input" type="text" readonly />
+      <div class="sync-modal-actions">
+        <button id="btnSyncModalCopy" type="button" class="outline-btn is-sync-btn">全選並複製</button>
+        <button id="btnSyncModalClose" type="button" class="outline-btn">關閉</button>
+      </div>
+    </div>
+  </div>
 
   <script>
     (function () {
@@ -1972,58 +2057,70 @@
       ];
 
       // =========================================================================
-      // 2. 應用程式狀態與本機儲存管理 (含 try/catch 容錯)
+      // 2. 固定順序索引、狀態管理與本機儲存 (含跨裝置 Bitmask 編解碼)
       // =========================================================================
-      const STORAGE_KEY = 'winter_jp_handbook_mastered_v2';
+      const STORAGE_KEY = 'jp_winter_tokyo_karuizawa_v1';
+
+      // 建立固定順序的所有項目清單（用於 bitmask 同步編碼與進度統計）
+      const ALL_ITEMS = [];
+      CATEGORIES.forEach(function (cat) {
+        if (cat.vocab) cat.vocab.forEach(function (item) { ALL_ITEMS.push({ id: item.id, core: !!item.core, catKey: cat.key }); });
+        if (cat.sentences) cat.sentences.forEach(function (item) { ALL_ITEMS.push({ id: item.id, core: !!item.core, catKey: cat.key }); });
+        if (cat.qaList) cat.qaList.forEach(function (item) { ALL_ITEMS.push({ id: item.id, core: !!item.core, catKey: cat.key }); });
+        if (cat.patterns) cat.patterns.forEach(function (item) { ALL_ITEMS.push({ id: item.id, core: !!item.core, catKey: cat.key }); });
+      });
+
+      const ALL_IDS = ALL_ITEMS.map(function (item) { return item.id; });
+      const CORE_IDS = ALL_ITEMS.filter(function (item) { return item.core; }).map(function (item) { return item.id; });
+      const VALID_ID_SET = new Set(ALL_IDS);
 
       const state = {
-        activeCat: 'transport',
-        filterMode: 'all', // 'all' | 'core'
+        activeCategory: CATEGORIES[0].key,
+        filterScope: 'all',     // 'all' | 'core'
         hideMastered: false,
         maskJa: false,
         maskRomaji: false,
         maskZh: false,
         speechRate: 1.0,
         mastered: new Set(),
-        peeked: new Set(),
-        resetConfirmTimer: null,
-        activeSpeakBtn: null,
-        jaVoice: null
+        revealedKeys: new Set(), // 記錄遮罩狀態下被單獨點擊偷看的區塊
+        resetConfirmTimer: null
       };
 
-      /**
-       * 安全讀取 localStorage 中的熟記紀錄
-       */
-      function loadMastered() {
-        try {
-          const raw = window.localStorage.getItem(STORAGE_KEY);
-          if (raw) {
-            const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed)) {
-              state.mastered = new Set(parsed);
-            }
-          }
-        } catch (err) {
-          console.warn('無法讀取本機儲存，將改用記憶體暫存：', err);
-        }
-      }
-
-      /**
-       * 安全寫入熟記紀錄至 localStorage
-       */
-      function saveMastered() {
-        try {
-          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(state.mastered)));
-        } catch (err) {
-          console.warn('無法寫入本機儲存：', err);
-        }
-      }
+      // DOM 元素參照
+      const els = {
+        btnFilterAll: document.getElementById('btnFilterAll'),
+        btnFilterCore: document.getElementById('btnFilterCore'),
+        totalAllChip: document.getElementById('totalAllChip'),
+        coreTotalChip: document.getElementById('coreTotalChip'),
+        btnHideMastered: document.getElementById('btnHideMastered'),
+        btnMaskJa: document.getElementById('btnMaskJa'),
+        btnMaskRomaji: document.getElementById('btnMaskRomaji'),
+        btnMaskZh: document.getElementById('btnMaskZh'),
+        btnRateNormal: document.getElementById('btnRateNormal'),
+        btnRateSlow: document.getElementById('btnRateSlow'),
+        btnSyncProgress: document.getElementById('btnSyncProgress'),
+        coreProgressFill: document.getElementById('coreProgressFill'),
+        coreProgressText: document.getElementById('coreProgressText'),
+        allProgressFill: document.getElementById('allProgressFill'),
+        allProgressText: document.getElementById('allProgressText'),
+        btnResetProgress: document.getElementById('btnResetProgress'),
+        sidebarNav: document.getElementById('sidebarNav'),
+        mainScrollArea: document.getElementById('mainScrollArea'),
+        contentContainer: document.getElementById('contentContainer'),
+        toastContainer: document.getElementById('toastContainer'),
+        syncModalBackdrop: document.getElementById('syncModalBackdrop'),
+        syncModalDesc: document.getElementById('syncModalDesc'),
+        syncModalInput: document.getElementById('syncModalInput'),
+        btnSyncModalCopy: document.getElementById('btnSyncModalCopy'),
+        btnSyncModalClose: document.getElementById('btnSyncModalClose')
+      };
 
       // =========================================================================
-      // 3. 工具函式：資料統計、HTML 跳脫、Toast 提示與日語語音合成 (TTS)
+      // 3. 工具函式：安全存取 localStorage、HTML 轉義、Toast 浮動提示
       // =========================================================================
       function escapeHtml(str) {
-        return String(str)
+        return String(str == null ? '' : str)
           .replace(/&/g, '&amp;')
           .replace(/</g, '&lt;')
           .replace(/>/g, '&gt;')
@@ -2031,302 +2128,472 @@
           .replace(/'/g, '&#39;');
       }
 
-      /**
-       * 取得單一分類底下所有項目清單
-       */
-      function getCategoryItems(cat) {
-        if (cat.vocab || cat.sentences) {
-          return [].concat(cat.vocab || [], cat.sentences || []);
-        }
-        if (cat.qaList) return cat.qaList;
-        if (cat.patterns) return cat.patterns;
-        return [];
-      }
-
-      /**
-       * 取得全手冊所有項目清單
-       */
-      function getAllItems() {
-        const list = [];
-        CATEGORIES.forEach(function (cat) {
-          getCategoryItems(cat).forEach(function (item) {
-            list.push(item);
-          });
-        });
-        return list;
-      }
-
-      /**
-       * 顯示右下角輕量浮動提示 (取代 alert)
-       */
-      function showToast(message) {
-        const container = document.getElementById('toastContainer');
-        if (!container) return;
-
-        const el = document.createElement('div');
-        el.className = 'toast-item';
-        el.textContent = message;
-        container.appendChild(el);
-
-        window.setTimeout(function () {
-          el.classList.add('is-fading');
-          window.setTimeout(function () {
-            if (el.parentNode) el.parentNode.removeChild(el);
-          }, 260);
-        }, 2000);
-      }
-
-      /**
-       * 初始化並挑選最佳日語語音
-       */
-      function initSpeechVoices() {
-        if (!('speechSynthesis' in window)) return;
-        const pickVoice = function () {
-          try {
-            const voices = window.speechSynthesis.getVoices() || [];
-            state.jaVoice =
-              voices.find(function (v) { return v.lang === 'ja-JP' && /Google|Kyoko|O-Ren|Nanami|Haruka/i.test(v.name); }) ||
-              voices.find(function (v) { return v.lang && v.lang.toLowerCase().startsWith('ja'); }) ||
-              null;
-          } catch (err) {
-            state.jaVoice = null;
+      function loadProgressFromStorage() {
+        try {
+          const raw = window.localStorage.getItem(STORAGE_KEY);
+          if (!raw) return;
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            state.mastered = new Set(parsed.filter(function (id) { return VALID_ID_SET.has(id); }));
           }
-        };
-        pickVoice();
-        if (typeof window.speechSynthesis.onvoiceschanged !== 'undefined') {
-          window.speechSynthesis.onvoiceschanged = pickVoice;
+        } catch (err) {
+          // 忽略沙盒或無痕模式 localStorage 例外
         }
       }
 
-      /**
-       * 朗讀純日文內容
-       */
+      function saveProgressToStorage() {
+        try {
+          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(state.mastered)));
+        } catch (err) {
+          // 忽略儲存例外
+        }
+      }
+
+      function showToast(message, durationMs) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-item';
+        toast.textContent = message;
+        els.toastContainer.appendChild(toast);
+
+        const stayTime = typeof durationMs === 'number' ? durationMs : 3000;
+        window.setTimeout(function () {
+          toast.classList.add('is-fading');
+          window.setTimeout(function () {
+            if (toast.parentNode) toast.parentNode.removeChild(toast);
+          }, 260);
+        }, stayTime);
+      }
+
+      // =========================================================================
+      // 4. 跨裝置同步：Bitmask + Base64URL 編解碼與剪貼簿處理
+      // =========================================================================
+      function encodeMasteredToCode(masteredSet) {
+        const byteLen = Math.ceil(ALL_IDS.length / 8);
+        const bytes = new Uint8Array(byteLen);
+        for (let i = 0; i < ALL_IDS.length; i++) {
+          if (masteredSet.has(ALL_IDS[i])) {
+            bytes[i >> 3] |= (1 << (i & 7));
+          }
+        }
+        let binary = '';
+        for (let i = 0; i < bytes.length; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        return btoa(binary)
+          .replace(/\+/g, '-')
+          .replace(/\//g, '_')
+          .replace(/=+$/, '');
+      }
+
+      function decodeCodeToMastered(code) {
+        if (!code || typeof code !== 'string') return null;
+        try {
+          let b64 = code.replace(/-/g, '+').replace(/_/g, '/');
+          while (b64.length % 4 !== 0) {
+            b64 += '=';
+          }
+          const binary = atob(b64);
+          const expectedLen = Math.ceil(ALL_IDS.length / 8);
+          if (binary.length !== expectedLen) return null;
+
+          const restored = new Set();
+          for (let i = 0; i < ALL_IDS.length; i++) {
+            const byteVal = binary.charCodeAt(i >> 3);
+            if ((byteVal & (1 << (i & 7))) !== 0) {
+              restored.add(ALL_IDS[i]);
+            }
+          }
+          return restored;
+        } catch (err) {
+          return null;
+        }
+      }
+
+      function buildSyncUrl(code) {
+        const proto = window.location.protocol;
+        if (proto === 'http:' || proto === 'https:') {
+          return {
+            url: window.location.origin + window.location.pathname + '#sync=' + code,
+            isHosted: true
+          };
+        }
+        if (proto === 'file:') {
+          return {
+            url: window.location.href.split('#')[0] + '#sync=' + code,
+            isHosted: true
+          };
+        }
+        // 預覽沙盒 (about:srcdoc / blob:) 環境提供可直接附加於網址尾端的短碼
+        return {
+          url: '#sync=' + code,
+          isHosted: false
+        };
+      }
+
+      function copyTextWithFallback(text) {
+        return new Promise(function (resolve) {
+          if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+            navigator.clipboard.writeText(text).then(function () {
+              resolve(true);
+            }).catch(function () {
+              resolve(copyViaExecCommand(text));
+            });
+          } else {
+            resolve(copyViaExecCommand(text));
+          }
+        });
+      }
+
+      function copyViaExecCommand(text) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.top = '-9999px';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.focus();
+          ta.select();
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          return !!ok;
+        } catch (err) {
+          return false;
+        }
+      }
+
+      function openSyncModal(urlText, isHosted) {
+        els.syncModalDesc.textContent = isHosted
+          ? '瀏覽器限制自動複製，請複製下方專屬同步網址並貼到其他裝置開啟：'
+          : '目前為離線預覽環境，請複製下方同步短碼並加在您 GitHub 網頁網址後方：';
+        els.syncModalInput.value = urlText;
+        els.syncModalBackdrop.classList.add('is-open');
+        window.setTimeout(function () {
+          els.syncModalInput.focus();
+          els.syncModalInput.select();
+        }, 30);
+      }
+
+      function closeSyncModal() {
+        els.syncModalBackdrop.classList.remove('is-open');
+      }
+
+      function handleExportSync() {
+        const code = encodeMasteredToCode(state.mastered);
+        const result = buildSyncUrl(code);
+        const count = state.mastered.size;
+
+        copyTextWithFallback(result.url).then(function (copied) {
+          if (copied) {
+            if (result.isHosted) {
+              showToast('✅ 已複製同步網址（共 ' + count + ' 項已熟記），在其他裝置貼上開啟即可同步', 3600);
+            } else {
+              showToast('✅ 已複製同步短碼 ' + result.url + '（共 ' + count + ' 項已熟記），貼在您的網頁網址後方即可同步', 4000);
+            }
+          } else {
+            openSyncModal(result.url, result.isHosted);
+          }
+        });
+      }
+
+      function checkAndApplySyncFromHash() {
+        const hash = window.location.hash || '';
+        const match = hash.match(/sync=([A-Za-z0-9_-]+)/);
+        if (!match) return false;
+
+        const code = match[1];
+        const decodedSet = decodeCodeToMastered(code);
+        if (!decodedSet) {
+          showToast('⚠️ 同步短碼格式無效，未變更現有進度', 3200);
+          return false;
+        }
+
+        state.mastered = decodedSet;
+        saveProgressToStorage();
+
+        // 清除網址列中的 #sync=... 保持網址整潔
+        try {
+          if (window.history && typeof window.history.replaceState === 'function') {
+            const cleanUrl = window.location.pathname + window.location.search;
+            window.history.replaceState(null, '', cleanUrl);
+          }
+        } catch (err) {
+          // 忽略受限環境 replaceState 例外
+        }
+
+        updateAllUI();
+        showToast('✅ 已從同步網址載入 ' + decodedSet.size + ' 項熟記進度！', 3600);
+        return true;
+      }
+
+      // =========================================================================
+      // 5. 純日語真人發音引擎 (Web Speech API, ja-JP)
+      // =========================================================================
+      let preferredJaVoice = null;
+      let activeSpeakBtn = null;
+
+      function refreshJapaneseVoice() {
+        if (!('speechSynthesis' in window)) return;
+        const voices = window.speechSynthesis.getVoices() || [];
+        const jaVoices = voices.filter(function (v) {
+          return v.lang && v.lang.toLowerCase().indexOf('ja') === 0;
+        });
+        if (!jaVoices.length) return;
+
+        // 優先選擇自然度高的日語語音
+        const priorityKeywords = ['google', 'kyoko', 'o-ren', 'otoya', 'nanami', 'haruka', 'ayumi'];
+        for (let i = 0; i < priorityKeywords.length; i++) {
+          const kw = priorityKeywords[i];
+          const found = jaVoices.find(function (v) {
+            return v.name && v.name.toLowerCase().indexOf(kw) !== -1;
+          });
+          if (found) {
+            preferredJaVoice = found;
+            return;
+          }
+        }
+        preferredJaVoice = jaVoices[0];
+      }
+
+      if ('speechSynthesis' in window) {
+        refreshJapaneseVoice();
+        if (typeof window.speechSynthesis.onvoiceschanged !== 'undefined') {
+          window.speechSynthesis.onvoiceschanged = refreshJapaneseVoice;
+        }
+      }
+
       function speakJapanese(text, btnEl) {
         if (!('speechSynthesis' in window)) {
-          showToast('此瀏覽器不支援語音朗讀功能');
+          showToast('⚠️ 此瀏覽器不支援日語語音朗讀功能', 2600);
           return;
         }
-
         try {
           window.speechSynthesis.cancel();
-          if (state.activeSpeakBtn) {
-            state.activeSpeakBtn.classList.remove('is-speaking');
-            state.activeSpeakBtn = null;
+          if (activeSpeakBtn) {
+            activeSpeakBtn.classList.remove('is-speaking');
+            activeSpeakBtn = null;
           }
 
           const utter = new SpeechSynthesisUtterance(text);
           utter.lang = 'ja-JP';
           utter.rate = state.speechRate;
-          if (state.jaVoice) {
-            utter.voice = state.jaVoice;
+          if (preferredJaVoice) {
+            utter.voice = preferredJaVoice;
           }
 
           if (btnEl) {
             btnEl.classList.add('is-speaking');
-            state.activeSpeakBtn = btnEl;
+            activeSpeakBtn = btnEl;
           }
 
-          const clearBtnState = function () {
+          const clearSpeakingState = function () {
             if (btnEl) btnEl.classList.remove('is-speaking');
-            if (state.activeSpeakBtn === btnEl) state.activeSpeakBtn = null;
+            if (activeSpeakBtn === btnEl) activeSpeakBtn = null;
           };
+          utter.onend = clearSpeakingState;
+          utter.onerror = clearSpeakingState;
 
-          utter.onend = clearBtnState;
-          utter.onerror = clearBtnState;
           window.speechSynthesis.speak(utter);
         } catch (err) {
-          showToast('語音播放失敗，請稍後再試');
+          showToast('⚠️ 語音播放暫時無法啟動，請再試一次', 2400);
         }
       }
 
       // =========================================================================
-      // 4. 遮罩測驗輔助函式
+      // 6. 遮罩渲染輔助函式 (支援點擊單獨偷看)
       // =========================================================================
-      function renderMaskable(content, type, peekKey, extraClass) {
+      function renderMaskedField(text, fieldType, revealKey, hintLabel) {
         const isMasked =
-          (type === 'ja' && state.maskJa) ||
-          (type === 'romaji' && state.maskRomaji) ||
-          (type === 'zh' && state.maskZh);
+          (fieldType === 'ja' && state.maskJa) ||
+          (fieldType === 'romaji' && state.maskRomaji) ||
+          (fieldType === 'zh' && state.maskZh);
 
-        const safeText = escapeHtml(content);
-
-        if (!isMasked || state.peeked.has(peekKey)) {
-          return '<div class="' + extraClass + '">' + safeText + '</div>';
+        const safeText = escapeHtml(text);
+        if (!isMasked || state.revealedKeys.has(revealKey)) {
+          return safeText;
         }
 
-        const hintLabel = type === 'ja' ? '點擊看日文' : type === 'romaji' ? '點擊看拼音' : '點擊看中文';
         return (
-          '<div class="' + extraClass + '">' +
-            '<button type="button" class="mask-btn" data-action="peek" data-peek-key="' + escapeHtml(peekKey) + '" title="點擊偷看答案">' +
-              '<span class="mask-blur">' + safeText + '</span>' +
-              '<span class="mask-hint">' + hintLabel + '</span>' +
-            '</button>' +
-          '</div>'
+          '<button type="button" class="mask-btn" data-action="peek" data-reveal-key="' + escapeHtml(revealKey) + '" title="點擊偷看答案">' +
+            '<span class="mask-blur">' + safeText + '</span>' +
+            '<span class="mask-hint">' + escapeHtml(hintLabel) + '</span>' +
+          '</button>'
         );
       }
 
-      /**
-       * 判斷項目是否符合當前篩選條件
-       */
-      function passesFilter(item) {
-        if (state.filterMode === 'core' && !item.core) return false;
-        if (state.hideMastered && state.mastered.has(item.id)) return false;
-        return true;
+      // =========================================================================
+      // 7. 介面渲染：頂部進度、左側分類卡片、右側內容卡片
+      // =========================================================================
+      function getCategoryItems(cat) {
+        const list = [];
+        if (cat.vocab) cat.vocab.forEach(function (x) { list.push(x); });
+        if (cat.sentences) cat.sentences.forEach(function (x) { list.push(x); });
+        if (cat.qaList) cat.qaList.forEach(function (x) { list.push(x); });
+        if (cat.patterns) cat.patterns.forEach(function (x) { list.push(x); });
+        return list;
       }
 
-      // =========================================================================
-      // 5. 介面渲染函式 (進度條、左側導覽、右側卡片區)
-      // =========================================================================
+      function filterItems(list) {
+        if (!list) return [];
+        return list.filter(function (item) {
+          if (state.filterScope === 'core' && !item.core) return false;
+          if (state.hideMastered && state.mastered.has(item.id)) return false;
+          return true;
+        });
+      }
+
       function updateHeaderAndProgress() {
-        const allItems = getAllItems();
-        const coreItems = allItems.filter(function (i) { return i.core; });
+        // 數量晶片
+        els.totalAllChip.textContent = String(ALL_IDS.length);
+        els.coreTotalChip.textContent = String(CORE_IDS.length);
 
-        const allTotal = allItems.length;
-        const coreTotal = coreItems.length;
-        const allDone = allItems.filter(function (i) { return state.mastered.has(i.id); }).length;
-        const coreDone = coreItems.filter(function (i) { return state.mastered.has(i.id); }).length;
+        // 篩選按鈕樣式
+        els.btnFilterAll.classList.toggle('is-active', state.filterScope === 'all');
+        els.btnFilterCore.classList.toggle('is-core-active', state.filterScope === 'core');
+        els.btnHideMastered.classList.toggle('is-hide-active', state.hideMastered);
 
-        const allPct = allTotal ? Math.round((allDone / allTotal) * 100) : 0;
-        const corePct = coreTotal ? Math.round((coreDone / coreTotal) * 100) : 0;
+        // 三向遮罩按鈕樣式
+        els.btnMaskJa.classList.toggle('is-active', state.maskJa);
+        els.btnMaskRomaji.classList.toggle('is-active', state.maskRomaji);
+        els.btnMaskZh.classList.toggle('is-active', state.maskZh);
 
-        document.getElementById('totalAllChip').textContent = String(allTotal);
-        document.getElementById('coreTotalChip').textContent = String(coreTotal);
+        // 語速按鈕樣式
+        els.btnRateNormal.classList.toggle('is-rate-active', state.speechRate === 1.0);
+        els.btnRateSlow.classList.toggle('is-rate-active', state.speechRate === 0.75);
 
-        document.getElementById('coreProgressFill').style.width = corePct + '%';
-        document.getElementById('coreProgressText').textContent = coreDone + '/' + coreTotal + ' (' + corePct + '%)';
+        // 雙進度條計算
+        let coreDone = 0;
+        for (let i = 0; i < CORE_IDS.length; i++) {
+          if (state.mastered.has(CORE_IDS[i])) coreDone++;
+        }
+        const allDone = state.mastered.size;
 
-        document.getElementById('allProgressFill').style.width = allPct + '%';
-        document.getElementById('allProgressText').textContent = allDone + '/' + allTotal + ' (' + allPct + '%)';
+        const corePct = CORE_IDS.length ? Math.round((coreDone / CORE_IDS.length) * 100) : 0;
+        const allPct = ALL_IDS.length ? Math.round((allDone / ALL_IDS.length) * 100) : 0;
 
-        // 按鈕狀態同步
-        const btnAll = document.getElementById('btnFilterAll');
-        const btnCore = document.getElementById('btnFilterCore');
-        btnAll.classList.toggle('is-active', state.filterMode === 'all');
-        btnCore.classList.toggle('is-core-active', state.filterMode === 'core');
+        els.coreProgressFill.style.width = corePct + '%';
+        els.coreProgressText.textContent = coreDone + '/' + CORE_IDS.length + ' (' + corePct + '%)';
 
-        document.getElementById('btnHideMastered').classList.toggle('is-hide-active', state.hideMastered);
-        document.getElementById('btnMaskJa').classList.toggle('is-active', state.maskJa);
-        document.getElementById('btnMaskRomaji').classList.toggle('is-active', state.maskRomaji);
-        document.getElementById('btnMaskZh').classList.toggle('is-active', state.maskZh);
-
-        document.getElementById('btnRateNormal').classList.toggle('is-rate-active', state.speechRate === 1.0);
-        document.getElementById('btnRateSlow').classList.toggle('is-rate-active', state.speechRate === 0.75);
+        els.allProgressFill.style.width = allPct + '%';
+        els.allProgressText.textContent = allDone + '/' + ALL_IDS.length + ' (' + allPct + '%)';
       }
 
       function renderSidebar() {
-        const nav = document.getElementById('sidebarNav');
-        if (!nav) return;
-
-        nav.innerHTML = CATEGORIES.map(function (cat) {
-          const items = getCategoryItems(cat);
-          const visibleCount = items.filter(passesFilter).length;
-          const isActive = cat.key === state.activeCat;
+        const html = CATEGORIES.map(function (cat) {
+          const allCatItems = getCategoryItems(cat);
+          const visibleCount = filterItems(allCatItems).length;
+          const isActive = cat.key === state.activeCategory;
           const activeStyle = isActive
-            ? 'border-color: ' + cat.color + '; background-color: ' + cat.bgTint + '; box-shadow: inset 4px 0 0 ' + cat.color + ';'
+            ? 'border-color:' + cat.color + ';background-color:' + cat.bgTint + ';box-shadow:inset 4px 0 0 ' + cat.color + ';'
             : '';
 
           return (
-            '<button type="button" class="cat-card-btn" data-action="select-cat" data-cat="' + cat.key + '" style="' + activeStyle + '">' +
+            '<button type="button" class="cat-card-btn" data-cat-key="' + escapeHtml(cat.key) + '" style="' + activeStyle + '">' +
               '<div class="cat-card-top">' +
-                '<span class="cat-card-title">' +
+                '<span class="cat-card-title" style="' + (isActive ? 'color:' + cat.color + ';' : '') + '">' +
                   '<span>' + cat.icon + '</span>' +
                   '<span>' + escapeHtml(cat.name) + '</span>' +
                 '</span>' +
-                '<span class="cat-card-count">' + visibleCount + '/' + items.length + '</span>' +
+                '<span class="cat-card-count">' + visibleCount + '</span>' +
               '</div>' +
-              '<div class="cat-card-meta">' + escapeHtml(cat.meta) + '</div>' +
+              '<span class="cat-card-meta">' + escapeHtml(cat.meta) + '</span>' +
             '</button>'
           );
         }).join('');
-      }
 
-      function renderActionButtons(id, ttsText) {
-        const isMastered = state.mastered.has(id);
-        return (
-          '<div class="action-btns">' +
-            (ttsText
-              ? '<button type="button" class="icon-btn" data-action="speak" data-tts="' + escapeHtml(ttsText) + '" title="播放日語發音" aria-label="播放日語發音">🔊</button>'
-              : '') +
-            '<button type="button" class="icon-btn' + (isMastered ? ' is-checked' : '') + '" data-action="toggle-mastered" data-id="' + escapeHtml(id) + '" title="' + (isMastered ? '取消熟記' : '標記為已熟記') + '" aria-label="切換熟記狀態">✓</button>' +
-          '</div>'
-        );
+        els.sidebarNav.innerHTML = html;
       }
 
       function renderVocabCard(item) {
-        const cls = 'card-base vocab-card' + (item.core ? ' is-core' : '') + (state.mastered.has(item.id) ? ' is-mastered' : '');
+        const isMastered = state.mastered.has(item.id);
+        const cls = 'card-base vocab-card' + (item.core ? ' is-core' : '') + (isMastered ? ' is-mastered' : '');
+        const checkCls = 'icon-btn' + (isMastered ? ' is-checked' : '');
+
         return (
           '<article class="' + cls + '">' +
             '<div class="vocab-left">' +
-              renderMaskable(item.kana, 'ja', item.id + ':kana', 'vocab-kana') +
-              renderMaskable(item.ja, 'ja', item.id + ':ja', 'vocab-ja') +
-              renderMaskable(item.romaji, 'romaji', item.id + ':romaji', 'vocab-romaji') +
+              '<div class="vocab-kana">' + renderMaskedField(item.kana, 'ja', item.id + ':kana', '假名') + '</div>' +
+              '<div class="vocab-ja">' + renderMaskedField(item.ja, 'ja', item.id + ':ja', '顯示日文') + '</div>' +
+              '<div class="vocab-romaji">' + renderMaskedField(item.romaji, 'romaji', item.id + ':romaji', '顯示拼音') + '</div>' +
             '</div>' +
             '<div class="vocab-right">' +
               '<div>' +
-                renderMaskable(item.zh, 'zh', item.id + ':zh', 'vocab-zh') +
+                '<div class="vocab-zh">' + renderMaskedField(item.zh, 'zh', item.id + ':zh', '顯示中文') + '</div>' +
                 (item.note ? '<p class="vocab-note">' + escapeHtml(item.note) + '</p>' : '') +
               '</div>' +
               '<div class="vocab-actions">' +
-                renderActionButtons(item.id, item.tts) +
+                '<div class="action-btns">' +
+                  '<button type="button" class="icon-btn" data-action="speak" data-tts="' + escapeHtml(item.tts) + '" title="朗讀純日語發音" aria-label="朗讀日語">🔊</button>' +
+                  '<button type="button" class="' + checkCls + '" data-action="toggle-mastered" data-id="' + escapeHtml(item.id) + '" title="' + (isMastered ? '取消已熟記' : '標記為已熟記') + '" aria-label="切換已熟記">✓</button>' +
+                '</div>' +
               '</div>' +
             '</div>' +
           '</article>'
         );
       }
 
-      function renderSentenceCard(item, accentColor) {
-        const cls = 'card-base sentence-card' + (item.core ? ' is-core' : '') + (state.mastered.has(item.id) ? ' is-mastered' : '');
+      function renderSentenceCard(item, catColor) {
+        const isMastered = state.mastered.has(item.id);
+        const cls = 'card-base sentence-card' + (item.core ? ' is-core' : '') + (isMastered ? ' is-mastered' : '');
+        const checkCls = 'icon-btn' + (isMastered ? ' is-checked' : '');
+
         return (
           '<article class="' + cls + '">' +
             '<div class="sentence-left">' +
-              '<div class="sentence-scene" style="color: ' + accentColor + ';">' + escapeHtml(item.situation) + '</div>' +
-              renderMaskable(item.kana, 'ja', item.id + ':kana', 'sentence-kana') +
-              renderMaskable(item.ja, 'ja', item.id + ':ja', 'sentence-ja') +
-              renderMaskable(item.romaji, 'romaji', item.id + ':romaji', 'sentence-romaji') +
+              '<div class="sentence-scene" style="color:' + catColor + ';">' + escapeHtml(item.situation) + '</div>' +
+              '<div class="sentence-kana">' + renderMaskedField(item.kana, 'ja', item.id + ':kana', '顯示假名') + '</div>' +
+              '<div class="sentence-ja">' + renderMaskedField(item.ja, 'ja', item.id + ':ja', '顯示日文句型') + '</div>' +
+              '<div class="sentence-romaji">' + renderMaskedField(item.romaji, 'romaji', item.id + ':romaji', '顯示羅馬拼音') + '</div>' +
             '</div>' +
             '<div class="sentence-right">' +
-              '<div style="min-width: 0;">' +
-                renderMaskable(item.zh, 'zh', item.id + ':zh', 'sentence-zh') +
-                (item.tip ? '<p class="sentence-tip">' + escapeHtml(item.tip) + '</p>' : '') +
+              '<div style="min-width:0;">' +
+                '<div class="sentence-zh">' + renderMaskedField(item.zh, 'zh', item.id + ':zh', '顯示中文翻譯') + '</div>' +
+                (item.tip ? '<p class="sentence-tip">💡 ' + escapeHtml(item.tip) + '</p>' : '') +
               '</div>' +
-              renderActionButtons(item.id, item.tts) +
+              '<div class="action-btns">' +
+                '<button type="button" class="icon-btn" data-action="speak" data-tts="' + escapeHtml(item.tts) + '" title="朗讀純日語句型" aria-label="朗讀日語">🔊</button>' +
+                '<button type="button" class="' + checkCls + '" data-action="toggle-mastered" data-id="' + escapeHtml(item.id) + '" title="' + (isMastered ? '取消已熟記' : '標記為已熟記') + '" aria-label="切換已熟記">✓</button>' +
+              '</div>' +
             '</div>' +
           '</article>'
         );
       }
 
       function renderListeningCard(item) {
-        const cls = 'card-base listening-card' + (item.core ? ' is-core' : '') + (state.mastered.has(item.id) ? ' is-mastered' : '');
         const isMastered = state.mastered.has(item.id);
+        const cls = 'card-base listening-card' + (item.core ? ' is-core' : '') + (isMastered ? ' is-mastered' : '');
+        const checkCls = 'icon-btn' + (isMastered ? ' is-checked' : '');
+
         return (
           '<article class="' + cls + '">' +
             '<div class="listening-col clerk-col">' +
               '<div class="listening-body">' +
                 '<div class="badge-row">' +
-                  '<span class="role-badge role-clerk">店員會問</span>' +
+                  '<span class="role-badge role-clerk">店員提問</span>' +
                   '<span class="scene-tag">' + escapeHtml(item.scene) + '</span>' +
                 '</div>' +
-                renderMaskable(item.clerk.kana, 'ja', item.id + ':ck-kana', 'sentence-kana') +
-                renderMaskable(item.clerk.ja, 'ja', item.id + ':ck-ja', 'qa-ja') +
-                renderMaskable(item.clerk.romaji, 'romaji', item.id + ':ck-romaji', 'sentence-romaji') +
-                renderMaskable(item.clerk.zh, 'zh', item.id + ':ck-zh', 'qa-zh') +
+                '<div class="sentence-kana">' + renderMaskedField(item.clerk.kana, 'ja', item.id + ':ckana', '顯示假名') + '</div>' +
+                '<div class="qa-ja">' + renderMaskedField(item.clerk.ja, 'ja', item.id + ':cja', '顯示店員日文') + '</div>' +
+                '<div class="sentence-romaji">' + renderMaskedField(item.clerk.romaji, 'romaji', item.id + ':cromaji', '顯示拼音') + '</div>' +
+                '<div class="qa-zh">' + renderMaskedField(item.clerk.zh, 'zh', item.id + ':czh', '顯示中文') + '</div>' +
               '</div>' +
-              '<button type="button" class="icon-btn" data-action="speak" data-tts="' + escapeHtml(item.clerk.tts) + '" title="播放店員提問" aria-label="播放店員提問">🔊</button>' +
+              '<button type="button" class="icon-btn" data-action="speak" data-tts="' + escapeHtml(item.clerk.tts) + '" title="聽店員怎麼說" aria-label="朗讀店員提問">🔊</button>' +
             '</div>' +
             '<div class="listening-col">' +
               '<div class="listening-body">' +
                 '<div class="badge-row">' +
-                  '<span class="role-badge role-reply">你可以回答</span>' +
+                  '<span class="role-badge role-reply">你的道地回答</span>' +
                 '</div>' +
-                renderMaskable(item.reply.kana, 'ja', item.id + ':rp-kana', 'sentence-kana') +
-                renderMaskable(item.reply.ja, 'ja', item.id + ':rp-ja', 'qa-ja') +
-                renderMaskable(item.reply.romaji, 'romaji', item.id + ':rp-romaji', 'sentence-romaji') +
-                renderMaskable(item.reply.zh, 'zh', item.id + ':rp-zh', 'qa-zh') +
-                (item.reply.note ? '<p class="sentence-tip">' + escapeHtml(item.reply.note) + '</p>' : '') +
+                '<div class="sentence-kana">' + renderMaskedField(item.reply.kana, 'ja', item.id + ':rkana', '顯示假名') + '</div>' +
+                '<div class="qa-ja">' + renderMaskedField(item.reply.ja, 'ja', item.id + ':rja', '顯示回答日文') + '</div>' +
+                '<div class="sentence-romaji">' + renderMaskedField(item.reply.romaji, 'romaji', item.id + ':rromaji', '顯示拼音') + '</div>' +
+                '<div class="qa-zh">' + renderMaskedField(item.reply.zh, 'zh', item.id + ':rzh', '顯示中文') + '</div>' +
+                (item.reply.note ? '<p class="sentence-tip">💡 ' + escapeHtml(item.reply.note) + '</p>' : '') +
               '</div>' +
               '<div class="action-btns">' +
-                '<button type="button" class="icon-btn" data-action="speak" data-tts="' + escapeHtml(item.reply.tts) + '" title="播放你的回答" aria-label="播放你的回答">🔊</button>' +
-                '<button type="button" class="icon-btn' + (isMastered ? ' is-checked' : '') + '" data-action="toggle-mastered" data-id="' + escapeHtml(item.id) + '" title="' + (isMastered ? '取消熟記' : '標記為已熟記') + '" aria-label="切換熟記狀態">✓</button>' +
+                '<button type="button" class="icon-btn" data-action="speak" data-tts="' + escapeHtml(item.reply.tts) + '" title="朗讀建議回答" aria-label="朗讀回答">🔊</button>' +
+                '<button type="button" class="' + checkCls + '" data-action="toggle-mastered" data-id="' + escapeHtml(item.id) + '" title="' + (isMastered ? '取消已熟記' : '標記為已熟記') + '" aria-label="切換已熟記">✓</button>' +
               '</div>' +
             '</div>' +
           '</article>'
@@ -2334,24 +2601,27 @@
       }
 
       function renderGrammarCard(item) {
-        const cls = 'card-base grammar-card' + (item.core ? ' is-core' : '') + (state.mastered.has(item.id) ? ' is-mastered' : '');
         const isMastered = state.mastered.has(item.id);
+        const cls = 'card-base grammar-card' + (item.core ? ' is-core' : '') + (isMastered ? ' is-mastered' : '');
+        const checkCls = 'icon-btn' + (isMastered ? ' is-checked' : '');
+
         const examplesHtml = item.examples.map(function (ex, idx) {
+          const prefix = item.id + ':ex' + idx;
           return (
             '<div class="example-item">' +
-              '<div style="min-width: 0; display: flex; flex-direction: column; gap: 2px;">' +
-                renderMaskable(ex.kana, 'ja', item.id + ':ex' + idx + ':kana', 'sentence-kana') +
-                renderMaskable(ex.ja, 'ja', item.id + ':ex' + idx + ':ja', 'qa-ja') +
-                renderMaskable(ex.romaji, 'romaji', item.id + ':ex' + idx + ':romaji', 'sentence-romaji') +
-                renderMaskable(ex.zh, 'zh', item.id + ':ex' + idx + ':zh', 'qa-zh') +
+              '<div style="min-width:0;display:flex;flex-direction:column;gap:2px;">' +
+                '<div class="sentence-kana">' + renderMaskedField(ex.kana, 'ja', prefix + ':kana', '假名') + '</div>' +
+                '<div class="sentence-ja" style="font-size:17.5px;">' + renderMaskedField(ex.ja, 'ja', prefix + ':ja', '顯示例句日文') + '</div>' +
+                '<div class="sentence-romaji">' + renderMaskedField(ex.romaji, 'romaji', prefix + ':romaji', '顯示拼音') + '</div>' +
+                '<div class="qa-zh" style="font-size:15px;">' + renderMaskedField(ex.zh, 'zh', prefix + ':zh', '顯示中文') + '</div>' +
               '</div>' +
-              '<button type="button" class="icon-btn" data-action="speak" data-tts="' + escapeHtml(ex.tts) + '" title="播放例句發音" aria-label="播放例句發音">🔊</button>' +
+              '<button type="button" class="icon-btn" data-action="speak" data-tts="' + escapeHtml(ex.tts) + '" title="朗讀例句" aria-label="朗讀例句">🔊</button>' +
             '</div>'
           );
         }).join('');
 
-        const notesHtml = item.notes.map(function (n) {
-          return '<li>' + n + '</li>';
+        const notesHtml = item.notes.map(function (note) {
+          return '<li>' + note + '</li>';
         }).join('');
 
         return (
@@ -2360,15 +2630,15 @@
               '<div class="grammar-title-row">' +
                 '<span class="grammar-badge">' + escapeHtml(item.badge) + '</span>' +
                 '<h3 class="grammar-title">' + escapeHtml(item.title) + '</h3>' +
-                '<span class="grammar-meaning">— ' + escapeHtml(item.meaning) + '</span>' +
+                '<span class="grammar-meaning">（' + escapeHtml(item.meaning) + '）</span>' +
               '</div>' +
-              '<div class="formula-box">' + item.formulaHtml + '</div>' +
+              '<div class="formula-box">公式：' + item.formulaHtml + '</div>' +
               '<div class="example-list">' + examplesHtml + '</div>' +
             '</div>' +
             '<div class="grammar-right">' +
               '<div class="grammar-right-top">' +
-                '<span class="grammar-note-title">💡 延伸文法解說與實戰提醒</span>' +
-                '<button type="button" class="icon-btn' + (isMastered ? ' is-checked' : '') + '" data-action="toggle-mastered" data-id="' + escapeHtml(item.id) + '" title="' + (isMastered ? '取消熟記' : '標記為已熟記') + '" aria-label="切換熟記狀態">✓</button>' +
+                '<span class="grammar-note-title">📌 延伸文法與實戰解說</span>' +
+                '<button type="button" class="' + checkCls + '" data-action="toggle-mastered" data-id="' + escapeHtml(item.id) + '" title="' + (isMastered ? '取消已熟記' : '標記為已熟記') + '" aria-label="切換已熟記">✓</button>' +
               '</div>' +
               '<ul class="grammar-notes">' + notesHtml + '</ul>' +
             '</div>' +
@@ -2376,204 +2646,252 @@
         );
       }
 
-      function renderContent(preserveScroll) {
-        const scrollArea = document.getElementById('mainScrollArea');
-        const container = document.getElementById('contentContainer');
-        if (!container) return;
+      function renderMainContent() {
+        const cat = CATEGORIES.find(function (c) { return c.key === state.activeCategory; }) || CATEGORIES[0];
+        const parts = [];
 
-        const prevScrollTop = preserveScroll && scrollArea ? scrollArea.scrollTop : 0;
-        const cat = CATEGORIES.find(function (c) { return c.key === state.activeCat; }) || CATEGORIES[0];
-
-        let html =
-          '<section class="section-header">' +
+        // 分類標題區（無底色，僅底部分隔細線）
+        parts.push(
+          '<header class="section-header">' +
             '<h2><span>' + cat.icon + '</span><span>' + escapeHtml(cat.name) + '</span></h2>' +
             '<p>' + escapeHtml(cat.subtitle) + '</p>' +
-          '</section>';
+          '</header>'
+        );
 
-        let totalRendered = 0;
+        let visibleTotal = 0;
 
-        if (cat.vocab || cat.sentences) {
-          const vocabList = (cat.vocab || []).filter(passesFilter);
-          const sentenceList = (cat.sentences || []).filter(passesFilter);
-          totalRendered = vocabList.length + sentenceList.length;
-
-          if (vocabList.length > 0) {
-            html +=
-              '<div>' +
-                '<h3 class="sub-heading">高頻單字 (' + vocabList.length + ')</h3>' +
-                '<div class="vocab-grid">' +
-                  vocabList.map(renderVocabCard).join('') +
-                '</div>' +
-              '</div>';
+        if (cat.vocab) {
+          const filteredVocab = filterItems(cat.vocab);
+          visibleTotal += filteredVocab.length;
+          if (filteredVocab.length) {
+            parts.push(
+              '<section>' +
+                '<h3 class="sub-heading">核心單字（' + filteredVocab.length + '）</h3>' +
+                '<div class="vocab-grid">' + filteredVocab.map(renderVocabCard).join('') + '</div>' +
+              '</section>'
+            );
           }
+        }
 
-          if (sentenceList.length > 0) {
-            html +=
-              '<div>' +
-                '<h3 class="sub-heading">實戰情境句型 (' + sentenceList.length + ')</h3>' +
+        if (cat.sentences) {
+          const filteredSentences = filterItems(cat.sentences);
+          visibleTotal += filteredSentences.length;
+          if (filteredSentences.length) {
+            parts.push(
+              '<section>' +
+                '<h3 class="sub-heading">實戰句型（' + filteredSentences.length + '）</h3>' +
                 '<div class="stack-list">' +
-                  sentenceList.map(function (s) { return renderSentenceCard(s, cat.color); }).join('') +
+                  filteredSentences.map(function (s) { return renderSentenceCard(s, cat.color); }).join('') +
                 '</div>' +
-              '</div>';
-          }
-        } else if (cat.qaList) {
-          const qaFiltered = cat.qaList.filter(passesFilter);
-          totalRendered = qaFiltered.length;
-          if (qaFiltered.length > 0) {
-            html += '<div class="stack-list">' + qaFiltered.map(renderListeningCard).join('') + '</div>';
-          }
-        } else if (cat.patterns) {
-          const patternsFiltered = cat.patterns.filter(passesFilter);
-          totalRendered = patternsFiltered.length;
-          if (patternsFiltered.length > 0) {
-            html += '<div class="stack-list">' + patternsFiltered.map(renderGrammarCard).join('') + '</div>';
+              '</section>'
+            );
           }
         }
 
-        if (totalRendered === 0) {
-          html +=
+        if (cat.qaList) {
+          const filteredQa = filterItems(cat.qaList);
+          visibleTotal += filteredQa.length;
+          if (filteredQa.length) {
+            parts.push(
+              '<section>' +
+                '<div class="stack-list">' + filteredQa.map(renderListeningCard).join('') + '</div>' +
+              '</section>'
+            );
+          }
+        }
+
+        if (cat.patterns) {
+          const filteredPatterns = filterItems(cat.patterns);
+          visibleTotal += filteredPatterns.length;
+          if (filteredPatterns.length) {
+            parts.push(
+              '<section>' +
+                '<div class="stack-list">' + filteredPatterns.map(renderGrammarCard).join('') + '</div>' +
+              '</section>'
+            );
+          }
+        }
+
+        if (visibleTotal === 0) {
+          parts.push(
             '<div class="empty-state">' +
-              '<h3>此分類目前沒有符合篩選條件的卡片</h3>' +
-              '<p>您可能已全部熟記，或是開啟了「必背／隱藏已熟記」篩選。</p>' +
-              '<button type="button" class="empty-btn" data-action="clear-filters">顯示此分類全部卡片</button>' +
-            '</div>';
+              '<h3>這個分類在目前篩選條件下已全部完成！</h3>' +
+              '<p>您可以切換左側其他分類，或取消「隱藏已熟記／必背」篩選檢視完整內容。</p>' +
+              '<button type="button" class="empty-btn" data-action="clear-filters">顯示本分類全部卡片</button>' +
+            '</div>'
+          );
         }
 
-        container.innerHTML = html;
-
-        if (scrollArea) {
-          scrollArea.scrollTop = preserveScroll ? prevScrollTop : 0;
-        }
+        els.contentContainer.innerHTML = parts.join('');
       }
 
-      function renderAll(preserveScroll) {
+      function updateAllUI() {
         updateHeaderAndProgress();
         renderSidebar();
-        renderContent(preserveScroll);
+        renderMainContent();
       }
 
       // =========================================================================
-      // 6. 事件綁定與委派
+      // 8. 事件綁定與事件委派
       // =========================================================================
-      function bindEvents() {
-        document.getElementById('btnFilterAll').addEventListener('click', function () {
-          state.filterMode = 'all';
-          renderAll(false);
-        });
+      els.btnFilterAll.addEventListener('click', function () {
+        state.filterScope = 'all';
+        updateAllUI();
+      });
 
-        document.getElementById('btnFilterCore').addEventListener('click', function () {
-          state.filterMode = 'core';
-          renderAll(false);
-        });
+      els.btnFilterCore.addEventListener('click', function () {
+        state.filterScope = 'core';
+        updateAllUI();
+      });
 
-        document.getElementById('btnHideMastered').addEventListener('click', function () {
-          state.hideMastered = !state.hideMastered;
-          renderAll(true);
-        });
+      els.btnHideMastered.addEventListener('click', function () {
+        state.hideMastered = !state.hideMastered;
+        updateAllUI();
+      });
 
-        document.getElementById('btnMaskJa').addEventListener('click', function () {
-          state.maskJa = !state.maskJa;
-          state.peeked.clear();
-          renderAll(true);
-        });
+      els.btnMaskJa.addEventListener('click', function () {
+        state.maskJa = !state.maskJa;
+        state.revealedKeys.clear();
+        updateAllUI();
+      });
 
-        document.getElementById('btnMaskRomaji').addEventListener('click', function () {
-          state.maskRomaji = !state.maskRomaji;
-          state.peeked.clear();
-          renderAll(true);
-        });
+      els.btnMaskRomaji.addEventListener('click', function () {
+        state.maskRomaji = !state.maskRomaji;
+        state.revealedKeys.clear();
+        updateAllUI();
+      });
 
-        document.getElementById('btnMaskZh').addEventListener('click', function () {
-          state.maskZh = !state.maskZh;
-          state.peeked.clear();
-          renderAll(true);
-        });
+      els.btnMaskZh.addEventListener('click', function () {
+        state.maskZh = !state.maskZh;
+        state.revealedKeys.clear();
+        updateAllUI();
+      });
 
-        document.getElementById('btnRateNormal').addEventListener('click', function () {
-          state.speechRate = 1.0;
-          updateHeaderAndProgress();
-          showToast('語速已切換為正常 (1.0x)');
-        });
+      els.btnRateNormal.addEventListener('click', function () {
+        state.speechRate = 1.0;
+        updateHeaderAndProgress();
+      });
 
-        document.getElementById('btnRateSlow').addEventListener('click', function () {
-          state.speechRate = 0.75;
-          updateHeaderAndProgress();
-          showToast('語速已切換為慢速跟讀 (0.75x)');
-        });
+      els.btnRateSlow.addEventListener('click', function () {
+        state.speechRate = 0.75;
+        updateHeaderAndProgress();
+      });
 
-        // 兩段式安全重置按鈕 (不使用 window.confirm)
-        const resetBtn = document.getElementById('btnResetProgress');
-        resetBtn.addEventListener('click', function () {
-          if (!resetBtn.classList.contains('is-confirm')) {
-            resetBtn.classList.add('is-confirm');
-            resetBtn.textContent = '確認重置？';
-            if (state.resetConfirmTimer) window.clearTimeout(state.resetConfirmTimer);
-            state.resetConfirmTimer = window.setTimeout(function () {
-              resetBtn.classList.remove('is-confirm');
-              resetBtn.textContent = '重置';
-            }, 3500);
+      els.btnSyncProgress.addEventListener('click', handleExportSync);
+
+      // 兩段式安全重置（不使用原生 confirm）
+      els.btnResetProgress.addEventListener('click', function () {
+        if (!els.btnResetProgress.classList.contains('is-confirm')) {
+          els.btnResetProgress.classList.add('is-confirm');
+          els.btnResetProgress.textContent = '確定重置？';
+          state.resetConfirmTimer = window.setTimeout(function () {
+            els.btnResetProgress.classList.remove('is-confirm');
+            els.btnResetProgress.textContent = '重置';
+          }, 3000);
+          return;
+        }
+
+        if (state.resetConfirmTimer) {
+          window.clearTimeout(state.resetConfirmTimer);
+          state.resetConfirmTimer = null;
+        }
+        els.btnResetProgress.classList.remove('is-confirm');
+        els.btnResetProgress.textContent = '重置';
+        state.mastered.clear();
+        saveProgressToStorage();
+        updateAllUI();
+        showToast('已清空所有熟記進度紀錄', 2600);
+      });
+
+      // 左側大分類切換（事件委派）
+      els.sidebarNav.addEventListener('click', function (e) {
+        const btn = e.target.closest('[data-cat-key]');
+        if (!btn) return;
+        const nextKey = btn.getAttribute('data-cat-key');
+        if (nextKey && nextKey !== state.activeCategory) {
+          state.activeCategory = nextKey;
+          state.revealedKeys.clear();
+          updateAllUI();
+          els.mainScrollArea.scrollTop = 0;
+        }
+      });
+
+      // 右側主內容區互動（發音 / 熟記切換 / 遮罩偷看 / 清除篩選）
+      els.contentContainer.addEventListener('click', function (e) {
+        const target = e.target.closest('[data-action]');
+        if (!target) return;
+
+        const action = target.getAttribute('data-action');
+        if (action === 'speak') {
+          const ttsText = target.getAttribute('data-tts');
+          if (ttsText) speakJapanese(ttsText, target);
+          return;
+        }
+
+        if (action === 'toggle-mastered') {
+          const id = target.getAttribute('data-id');
+          if (!id) return;
+          if (state.mastered.has(id)) {
+            state.mastered.delete(id);
           } else {
-            if (state.resetConfirmTimer) window.clearTimeout(state.resetConfirmTimer);
-            resetBtn.classList.remove('is-confirm');
-            resetBtn.textContent = '重置';
-            state.mastered.clear();
-            saveMastered();
-            renderAll(true);
-            showToast('已清空所有熟記紀錄');
+            state.mastered.add(id);
           }
-        });
+          saveProgressToStorage();
+          updateAllUI();
+          return;
+        }
 
-        // 左側分類切換委派
-        document.getElementById('sidebarNav').addEventListener('click', function (e) {
-          const btn = e.target.closest('[data-action="select-cat"]');
-          if (!btn) return;
-          const catKey = btn.getAttribute('data-cat');
-          if (catKey && catKey !== state.activeCat) {
-            state.activeCat = catKey;
-            renderAll(false);
+        if (action === 'peek') {
+          const key = target.getAttribute('data-reveal-key');
+          if (key) {
+            state.revealedKeys.add(key);
+            renderMainContent();
           }
-        });
+          return;
+        }
 
-        // 右側內容區互動委派 (發音 / 切換熟記 / 遮罩偷看 / 清除篩選)
-        document.getElementById('contentContainer').addEventListener('click', function (e) {
-          const target = e.target.closest('[data-action]');
-          if (!target) return;
+        if (action === 'clear-filters') {
+          state.filterScope = 'all';
+          state.hideMastered = false;
+          updateAllUI();
+        }
+      });
 
-          const action = target.getAttribute('data-action');
-          if (action === 'speak') {
-            const ttsText = target.getAttribute('data-tts');
-            if (ttsText) speakJapanese(ttsText, target);
-          } else if (action === 'toggle-mastered') {
-            const id = target.getAttribute('data-id');
-            if (!id) return;
-            if (state.mastered.has(id)) {
-              state.mastered.delete(id);
-            } else {
-              state.mastered.add(id);
-            }
-            saveMastered();
-            renderAll(true);
-          } else if (action === 'peek') {
-            const key = target.getAttribute('data-peek-key');
-            if (key) {
-              state.peeked.add(key);
-              renderContent(true);
-            }
-          } else if (action === 'clear-filters') {
-            state.filterMode = 'all';
-            state.hideMastered = false;
-            renderAll(false);
-          }
-        });
+      // 手動複製備援視窗事件
+      els.btnSyncModalCopy.addEventListener('click', function () {
+        els.syncModalInput.focus();
+        els.syncModalInput.select();
+        const ok = copyViaExecCommand(els.syncModalInput.value);
+        if (ok) {
+          closeSyncModal();
+          showToast('✅ 已複製同步網址，在其他裝置貼上開啟即可同步', 3200);
+        }
+      });
+
+      els.btnSyncModalClose.addEventListener('click', closeSyncModal);
+      els.syncModalBackdrop.addEventListener('click', function (e) {
+        if (e.target === els.syncModalBackdrop) closeSyncModal();
+      });
+
+      // 監聽網址 hash 變化（方便使用者直接貼上 #sync=... 切換進度）
+      window.addEventListener('hashchange', checkAndApplySyncFromHash);
+
+      // =========================================================================
+      // 9. 初始化啟動
+      // =========================================================================
+      function init() {
+        loadProgressFromStorage();
+        const loadedFromSync = checkAndApplySyncFromHash();
+        if (!loadedFromSync) {
+          updateAllUI();
+        }
       }
 
-      // =========================================================================
-      // 7. 啟動初始化
-      // =========================================================================
-      loadMastered();
-      initSpeechVoices();
-      bindEvents();
-      renderAll(false);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
